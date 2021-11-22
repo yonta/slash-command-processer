@@ -20,10 +20,3 @@ jobs:
           git add a.txt
           git commit --all --message="Refactor: commit massage"
           git push
-
-      - name: Add reaction
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          token: ${{ secrets.PAT }}
-          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
-          reaction-type: hooray
