@@ -13,6 +13,7 @@ jobs:
         run: |
           git config --global user.name "github-action[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          echo "new line" >> a.txt
           git commit --all --message="Refactor: commit massage"
 
       - name: Add reaction
