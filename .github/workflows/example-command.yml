@@ -2,9 +2,34 @@ name: example-command
 on:
   repository_dispatch:
     types: [example-command]
-jobs:
+gjobs:
   example:
     runs-on: ubuntu-latest
+    steps:
+      - name: Add reaction
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
+          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
+          reaction-type: hooray
+
+name: fix-command
+on:
+  repository_dispatch:
+    types: [fix-command]
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Add Commit to PR
+        run: |
+          git config --global user.name "github-action[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit --all --message="Refactor: commit massage"
+
     steps:
       - name: Add reaction
         uses: peter-evans/create-or-update-comment@v1
