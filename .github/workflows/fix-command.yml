@@ -20,6 +20,7 @@ jobs:
           echo "new line" >> a.txt
           git add a.txt
           git commit --all --message="Refactor: commit massage"
+          git push
 
       - name: Add reaction
         uses: peter-evans/create-or-update-comment@v1
