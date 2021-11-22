@@ -1,10 +1,19 @@
-name: example-command
+name: fix-command
 on:
   repository_dispatch:
-    types: [example-command]
-gjobs:
-  example:
+    types: [fix-command]
+jobs:
+  fix:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Add Commit to PR
+        run: |
+          git config --global user.name "github-action[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit --all --message="Refactor: commit massage"
+
     steps:
       - name: Add reaction
         uses: peter-evans/create-or-update-comment@v1
